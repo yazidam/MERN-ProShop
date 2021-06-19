@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 // import products from '../products';
 // import axios from 'axios';
 import Product from '../components/Product';
+import Loader from '../components/Loader';
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
@@ -23,7 +24,7 @@ const HomeScreen = () => {
     <>
       <h1>Lates products</h1>
       {loading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : (
         <Row>
           {products.map((product) => (
