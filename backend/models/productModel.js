@@ -13,7 +13,7 @@ const productShema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true, //add relation ship between product and user
+      required: true, //add relation ship between product and user ENA user zeda product etheka
       ref: 'User',
     },
     name: {
