@@ -17,7 +17,7 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems')) //parsina eli mawjoud f local storge
   : [];
 const initialState = {
-  cart: { cartItems_in_localstorge: cartItemsFromStorage },
+  cart: { cartItems: cartItemsFromStorage },
 }; //ay haja n7boha load when redux store load n7otouha ghadii
 
 const middelware = [thunk];
