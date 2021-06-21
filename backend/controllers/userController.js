@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const generateToken = require('../utils/generateToken');
 const bcrypt = require('bcryptjs');
 //email and password authtification part & get token
 const authUser = async (req, res) => {
@@ -19,7 +20,7 @@ const authUser = async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      token: null,
+      token: generateToken(user._id),
     });
   }
 };
