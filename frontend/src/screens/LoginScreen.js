@@ -65,7 +65,12 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type="submit" variant="primary" className="my-3 ">
+        <Button
+          type="submit"
+          variant="primary"
+          className="my-3 "
+          disabled={email.length < 10}
+        >
           Sign In
         </Button>
 
