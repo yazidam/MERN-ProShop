@@ -5,6 +5,7 @@ import {
   USER_LOGOUT,
 } from '../constants/userConstants';
 import axios from 'axios';
+import { compareSync } from 'bcryptjs';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -26,6 +27,7 @@ export const login = (email, password) => async (dispatch) => {
     });
     localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
+    alert('hhhhh');
     dispatch({
       type: USER_LOGIN_FAIL,
       payload:

@@ -5,24 +5,33 @@ const bcrypt = require('bcryptjs');
 
 const authUser = async (req, res) => {
   //to acess data eli jeya mel front req.body
-  const email = req.body.email;
-  const password = req.body.password;
-  const user = await User.findOne({ email });
-  if (!user) {
-    return res.status(203).send("vous n'etes pas enregistrer");
-  }
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    return res.status(203).send('mot de passe incorrecte');
-  }
-  if (user && isMatch) {
-    res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      token: generateToken(user._id),
-    });
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    const user = await User.findOne({ email });
+    // if (!user) {
+    //   return res.status(203).send("vous n'etes pas enregistrer");
+    // }
+    const isMatch = await bcrypt.compare(password, user.password);
+    // if (!isMatch) {
+    //   return res.status(203).send('mot de passe incorrecte');
+    // }
+
+    if (user && isMatch) {
+      res.json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      });
+      console.log('loginnn');
+    } else {
+      res.status(401);
+      throw new Error('invalid email or password');
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 

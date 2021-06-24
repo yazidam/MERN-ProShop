@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
+import Message from '../components/Message';
 import FormContainer from '../components/FormContainer';
 import { login } from '../actions/userActions';
 const LoginScreen = ({ location, history }) => {
@@ -14,20 +15,34 @@ const LoginScreen = ({ location, history }) => {
   const { loading, error, userInfo } = userLogin;
   const redirect = location.search ? location.search.split('=')[1] : '/';
 
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     history.push(redirect);
-  //   }
-  // }, [history, userInfo, redirect]);
+  useEffect(() => {
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [history, userInfo, redirect]);
+  // useEffect(()=>{
+  //       if(userInfo){
+  //           if(userInfo.isAdmin){
+  //               history.push('/g')
+
+  //           }else{
+  //               history.push('/')
+
+  //           }
+  //       }
+
+  //   },[history,userInfo])
 
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
-    history.push(redirect);
+    // history.push(redirect);
   };
   return (
     <FormContainer>
-      <h1> Signe In</h1>
+      <h1> Sign In</h1>
+      {error && <h2>verifier votre coordonner {error}</h2>}
+      {/* {error && <Message variant="danger">{error}</Message>} */}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
