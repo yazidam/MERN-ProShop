@@ -1,17 +1,9 @@
-// import React from 'react';
-
-// const ProfileScreen = () => {
-//   return <div></div>;
-// };
-
-// export default ProfileScreen;
-
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
-import { getUserdetails } from '../actions/userActions';
+import { getUserdetails, updateUserProfile } from '../actions/userActions';
 const ProfileScreen = ({ location, history }) => {
   const [email, setEmail] = useState(''); // default empty string ('')
   const [password, setPassword] = useState('');
@@ -26,6 +18,9 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin); // njibo fih men userreducer
   const { userInfo } = userLogin;
 
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile); // njibo fih men userreducer
+  const { success } = userUpdateProfile;
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login');
@@ -38,24 +33,13 @@ const ProfileScreen = ({ location, history }) => {
       }
     }
   }, [dispatch, history, userInfo, user]);
-  // useEffect(()=>{
-  //       if(userInfo){
-  //           if(userInfo.isAdmin){
-  //               history.push('/g')
-
-  //           }else{
-  //               history.push('/')
-
-  //           }
-  //       }
-
-  //   },[history,userInfo])
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (password !== confirmpassword) {
       setMassage('password do not match');
     } else {
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
     // history.push(redirect);
   };
@@ -64,7 +48,7 @@ const ProfileScreen = ({ location, history }) => {
       <Col md={3}>
         <h2> User Profile</h2>
         {error && <h2>verifier votre coordonner {error}</h2>}
-        {/* {error && <Message variant="danger">{error}</Message>} */}
+        {success && <h2 variant="danger">Profile Updated</h2>}
         {loading && <Loader />}
         <Form onSubmit={submitHandler}>
           <Form.Group controlId="name">
@@ -110,7 +94,7 @@ const ProfileScreen = ({ location, history }) => {
             type="submit"
             variant="primary"
             className="my-3 "
-            disabled={email.length < 10}
+            // disabled={email.length < 10}
           >
             Update
           </Button>

@@ -9,9 +9,10 @@ import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_SUCCESS,
 } from '../constants/userConstants';
 import axios from 'axios';
-import { compareSync } from 'bcryptjs';
 
 export const login = (email, password) => async (dispatch) => {
   try {
@@ -104,6 +105,37 @@ export const getUserdetails = (id) => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/users/${id}`, config);
     dispatch({
       type: USER_DETAILS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    alert('hhhhh');
+    dispatch({
+      type: USER_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateUserProfile = (user) => async (dispatch, getState) => {
+  // get statte to get token
+  try {
+    dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        //when we send data we whon send in the headres a contenet type
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.put(`/api/users/profile`, user, config);
+    dispatch({
+      type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
     });
   } catch (error) {
