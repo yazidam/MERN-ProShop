@@ -125,7 +125,7 @@ const reset_password = async (req, res) => {
         return res.status(203).send("user dont exists with that email");
       }
       user.resetToken = token;
-      user.expireToken = Date.now() + 3600000;
+      user.expireToken = Date.now() + 60000;
       user.save().then((result) => {
         let transporter = nodemailer.createTransport({
           service: "gmail",
@@ -145,9 +145,31 @@ const reset_password = async (req, res) => {
           from: "wecodeesprit@gmail.com",
           subject: "Password reset",
           html: `<p>You requested for password reset</p>
-          <h5> clik this link <a href="https://localhost:3000/rest/${token}">link</a> to reset your password</h5>`,
+          <h5> clik this link <a href="http://localhost:3000/new_password/${token}">link</a> to reset your password</h5>`,
         });
         res.send("check your email");
+      });
+    });
+  });
+};
+
+const new_password = async (req, res) => {
+  const newPassword = req.body.password;
+  const sentToken = req.body.token;
+
+  User.findOne({
+    resetToken: sentToken,
+    expireToken: { $gt: Date.now() },
+  }).then((user) => {
+    if (!user) {
+      return res.status(203).send("Try again session expired");
+    }
+    bcrypt.hash(newPassword, 10).then((hashedpassword) => {
+      user.password = hashedpassword;
+      user.resetToken = undefined;
+      user.expireToken = undefined;
+      user.save().then((saveduser) => {
+        return res.send("password updated success");
       });
     });
   });
@@ -159,4 +181,5 @@ module.exports = {
   registerUser,
   updateUserProfile,
   reset_password,
+  new_password,
 };
