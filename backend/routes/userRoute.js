@@ -1,21 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const {
   authUser,
   getUserProfile,
   registerUser,
   updateUserProfile,
-} = require('../controllers/userController');
-const protect = require('../middleware/authMiddleware');
+  reset_password,
+} = require("../controllers/userController");
+const protect = require("../middleware/authMiddleware");
 
-router.post('/login', authUser);
+router.post("/login", authUser);
 // router.get('/profile', protect, getUserProfile);
 // router.put('/update', updateUserProfile);
 router
-  .route('/profile')
+  .route("/profile")
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
-router.post('/', registerUser);
+router.post("/", registerUser);
+router.post("/reset", reset_password);
 
 // router.get('/:id', getProductById);
 

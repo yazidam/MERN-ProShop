@@ -1,8 +1,8 @@
-const User = require('../models/userModel');
-const generateToken = require('../utils/generateToken');
-const bcrypt = require('bcryptjs');
-const crypto = require('crypto');
-var nodemailer = require('nodemailer');
+const User = require("../models/userModel");
+const generateToken = require("../utils/generateToken");
+const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
+var nodemailer = require("nodemailer");
 //email and password authtification part & get token
 
 const authUser = async (req, res) => {
@@ -27,10 +27,10 @@ const authUser = async (req, res) => {
         isAdmin: user.isAdmin,
         token: generateToken(user._id),
       });
-      console.log('loginnn');
+      console.log("loginnn");
     } else {
       res.status(401);
-      throw new Error('invalid email or password');
+      throw new Error("invalid email or password");
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -51,7 +51,7 @@ const getUserProfile = async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error('user dont found');
+    throw new Error("user dont found");
   }
 };
 
@@ -64,9 +64,9 @@ const registerUser = async (req, res) => {
   const userExist = await User.findOne({ email });
   if (userExist) {
     res.status(400);
-    console.log('exxxxxxxxxxx');
+    console.log("exxxxxxxxxxx");
 
-    throw new Error('User alredy Exist');
+    throw new Error("User alredy Exist");
   }
   const hashedPsw = await bcrypt.hash(password, 10);
 
@@ -85,7 +85,7 @@ const registerUser = async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error('invalid user data');
+    throw new Error("invalid user data");
   }
 };
 
@@ -108,47 +108,46 @@ const updateUserProfile = async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error('user dont found');
+    throw new Error("user dont found");
   }
 };
 
 // router.post('/reset-password'
 const reset_password = async (req, res) => {
   crypto.randomBytes(32, (err, buffer) => {
+    //crypto create token
     if (err) {
       console.log(err);
     }
-    const token = buffer.toString('hex');
+    const token = buffer.toString("hex");
     User.findOne({ email: req.body.email }).then((user) => {
       if (!user) {
-        return res.status(203).send('user dont exists with that email');
+        return res.status(203).send("user dont exists with that email");
       }
       user.resetToken = token;
-      user.expireToken = Date.now() + 60000;
+      user.expireToken = Date.now() + 3600000;
       user.save().then((result) => {
         let transporter = nodemailer.createTransport({
-          service: 'gmail',
+          service: "gmail",
           auth: {
-            type: 'OAuth2',
-            user: 'ahmedyzid.mejri@esprit.tn',
-            clientId: CLIENT_ID,
-            clientSecret: CLIENT_SECRET,
-            refreshToken: REFRESH_TOKEN,
-            accessToken: accessToken,
-            pass: 'wecode1234',
+            // type: "OAuth2",
+            user: "wecodeesprit@gmail.com",
+            // clientId: CLIENT_ID,
+            // clientSecret: CLIENT_SECRET,
+            // refreshToken: REFRESH_TOKEN,
+            // accessToken: accessToken,
+            pass: "wecode1234",
           },
         });
 
         transporter.sendMail({
           to: user.email,
-          from: 'wecodeesprit@gmail.com',
-          subject: 'Password reset',
-          // html: `
-          // <p>You request for password reset</p>
-          // <h5>Click in this <a href="https://view-distance.herokuapp.com/newpassword/${token}">link</a> to reset password</h5>
-          // `,
+          from: "wecodeesprit@gmail.com",
+          subject: "Password reset",
+          html: `<p>You requested for password reset</p>
+          <h5> clik this link <a href="https://localhost:3000/rest/${token}">link</a> to reset your password</h5>`,
         });
-        res.send('check your email');
+        res.send("check your email");
       });
     });
   });
