@@ -20,6 +20,12 @@ const userShema = mongoose.Schema(
       required: true,
       default: false,
     },
+    resetToken: {
+      type: String,
+    },
+    expireToken: {
+      type: Date,
+    },
   },
   {
     timestamps: true,

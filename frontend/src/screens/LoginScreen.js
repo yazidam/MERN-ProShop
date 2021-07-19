@@ -82,6 +82,9 @@ const LoginScreen = ({ location, history }) => {
             >
               Register
             </Link>
+            <Link className="mx-3" to="/forgetpassword">
+              Reset Password
+            </Link>
           </Col>
         </Row>
       </Form>

@@ -9,6 +9,7 @@ import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Header />
       <main className="mx-3">
         <Container>
+          <Route path="/forgetpassword" component={ResetPasswordScreen} />
           <Route path="/login" component={LoginScreen} />
           <Route path="/profile" component={ProfileScreen} />
           <Route path="/register" component={RegisterScreen} />

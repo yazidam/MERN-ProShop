@@ -1,6 +1,8 @@
 const User = require('../models/userModel');
 const generateToken = require('../utils/generateToken');
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
+var nodemailer = require('nodemailer');
 //email and password authtification part & get token
 
 const authUser = async (req, res) => {
@@ -109,9 +111,53 @@ const updateUserProfile = async (req, res) => {
     throw new Error('user dont found');
   }
 };
+
+// router.post('/reset-password'
+const reset_password = async (req, res) => {
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+    }
+    const token = buffer.toString('hex');
+    User.findOne({ email: req.body.email }).then((user) => {
+      if (!user) {
+        return res.status(203).send('user dont exists with that email');
+      }
+      user.resetToken = token;
+      user.expireToken = Date.now() + 60000;
+      user.save().then((result) => {
+        let transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: {
+            type: 'OAuth2',
+            user: 'ahmedyzid.mejri@esprit.tn',
+            clientId: CLIENT_ID,
+            clientSecret: CLIENT_SECRET,
+            refreshToken: REFRESH_TOKEN,
+            accessToken: accessToken,
+            pass: 'wecode1234',
+          },
+        });
+
+        transporter.sendMail({
+          to: user.email,
+          from: 'wecodeesprit@gmail.com',
+          subject: 'Password reset',
+          // html: `
+          // <p>You request for password reset</p>
+          // <h5>Click in this <a href="https://view-distance.herokuapp.com/newpassword/${token}">link</a> to reset password</h5>
+          // `,
+        });
+        res.send('check your email');
+      });
+    });
+  });
+};
+
 module.exports = {
   authUser,
   getUserProfile,
   registerUser,
   updateUserProfile,
+  reset_password,
 };
