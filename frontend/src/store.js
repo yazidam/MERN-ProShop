@@ -12,7 +12,7 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from './reducers/userReducers';
-const reducer = combineReducers({
+const reducer = combineReducers({//all reduceru we need to aded here 
   // empty objet we don't have any reducer yet   //b3ed nzidhom
   productList: productListReducer,
   productDetails: productDetailsReducer,
@@ -30,8 +30,13 @@ const cartItemsFromStorage = localStorage.getItem('cartItems')
 const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo')) //parsina eli mawjoud f local storge
   : null;
+
+
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
+  ? JSON.parse(localStorage.getItem('shippingAddress')) //parsina eli mawjoud f local storge
+  : {};  
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage },
+  cart: { cartItems: cartItemsFromStorage , shippingAddress: shippingAddressFromStorage },
   userLogin: { userInfo: userInfoFromStorage },
 }; //ay haja n7boha load when redux store load n7otouha ghadii
 
