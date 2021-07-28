@@ -129,20 +129,30 @@ const reset_password = async (req, res) => {
       user.save().then((result) => {
         let transporter = nodemailer.createTransport({
           service: "gmail",
+          secure: false,
+          requireTLS: true,
+          // port: 25,
+    // host: 'localhost',
+    tls: {
+      rejectUnauthorized: false
+    },
+          // host: 'smtp.gmail.com',
+          // port: 587,
+          // secure: true, // use SSL
           auth: {
             // type: "OAuth2",
-            user: "wecodeesprit@gmail.com",
+            user: "proshopahmed@gmail.com",
             // clientId: CLIENT_ID,
             // clientSecret: CLIENT_SECRET,
             // refreshToken: REFRESH_TOKEN,
             // accessToken: accessToken,
-            pass: "wecode1234",
+            pass: "proshop1234",
           },
         });
 
         transporter.sendMail({
           to: user.email,
-          from: "wecodeesprit@gmail.com",
+          from: "proshopahmed@gmail.com",
           subject: "Password reset",
           html: `<p>You requested for password reset</p>
           <h5> clik this link <a href="http://localhost:3000/new_password/${token}">link</a> to reset your password</h5>`,
@@ -166,8 +176,8 @@ const new_password = async (req, res) => {
     }
     bcrypt.hash(newPassword, 10).then((hashedpassword) => {
       user.password = hashedpassword;
-      user.resetToken = undefined;
-      user.expireToken = undefined;
+      user.resetToken = '';
+      user.expireToken = '';
       user.save().then((saveduser) => {
         return res.send("password updated success");
       });

@@ -1,5 +1,5 @@
 const express = require('express');
-
+// process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 const app = express();
 const dotenv = require('dotenv');
 const productRoute = require('./routes/productRoute');
