@@ -1,18 +1,19 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 import {
   productListReducer,
   productDetailsReducer,
-} from './reducers/productReducers';
-import { cartReducer } from './reducers/cartReducers';
+} from "./reducers/productReducers";
+import { cartReducer } from "./reducers/cartReducers";
 import {
   userLoginReducer,
   userRegisterReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
-} from './reducers/userReducers';
-const reducer = combineReducers({//all reduceru we need to aded here 
+} from "./reducers/userReducers";
+const reducer = combineReducers({
+  //all reduceru we need to aded here
   // empty objet we don't have any reducer yet   //b3ed nzidhom
   productList: productListReducer,
   productDetails: productDetailsReducer,
@@ -23,20 +24,27 @@ const reducer = combineReducers({//all reduceru we need to aded here
   userUpdateProfile: userUpdateProfileReducer,
 });
 
-const cartItemsFromStorage = localStorage.getItem('cartItems')
-  ? JSON.parse(localStorage.getItem('cartItems')) //parsina eli mawjoud f local storge
+const cartItemsFromStorage = localStorage.getItem("cartItems")
+  ? JSON.parse(localStorage.getItem("cartItems")) //parsina eli mawjoud f local storge
   : [];
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo')) //parsina eli mawjoud f local storge
+const userInfoFromStorage = localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo")) //parsina eli mawjoud f local storge
   : null;
 
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress")) //parsina eli mawjoud f local storge
+  : {};
 
-const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
-  ? JSON.parse(localStorage.getItem('shippingAddress')) //parsina eli mawjoud f local storge
-  : {};  
+const paymentMethodFromStorage = localStorage.getItem("paymentMethod")
+  ? JSON.parse(localStorage.getItem("paymentMethod")) //parsina eli mawjoud f local storge
+  : {};
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage , shippingAddress: shippingAddressFromStorage },
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+    paymentMethod: paymentMethodFromStorage,
+  },
   userLogin: { userInfo: userInfoFromStorage },
 }; //ay haja n7boha load when redux store load n7otouha ghadii
 

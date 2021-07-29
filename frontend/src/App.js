@@ -13,6 +13,7 @@ import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import NewPassword from "./screens/NewPassword";
 import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Container>
           <Route path="/shipping" component={ShippingScreen} />
           <Route path="/payment" component={PaymentScreen} />
+          <Route path="/placeorder" component={PlaceOrderScreen} />
 
           <Route path="/new_password/:token" component={NewPassword} />
           <Route path="/forgetpassword" component={ResetPasswordScreen} />

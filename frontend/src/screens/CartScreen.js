@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Row,
   Col,
@@ -9,19 +9,19 @@ import {
   Card,
   Button,
   Form,
-} from 'react-bootstrap';
-import { addToCart, removeFromCart } from '../actions/cartActions';
+} from "react-bootstrap";
+import { addToCart, removeFromCart } from "../actions/cartActions";
 
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id;
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1; // traj3lik el qty eli mawjoud f url
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1; // traj3lik el qty eli mawjoud f url
   console.log(qty);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   const h = cart.cartItems;
   console.log(cartItems);
-  console.log('hhhhhhh', h);
+  console.log("hhhhhhh", h);
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
@@ -30,11 +30,11 @@ const CartScreen = ({ match, location, history }) => {
 
   const removeFromeCartHandeler = (id) => {
     dispatch(removeFromCart(id));
-    console.log('remove');
+    console.log("remove");
   };
   const checkoutHandler = () => {
-    console.log('check outt');
-    history.push('/login?redirect=shipping'); //if he not login in refiret to login page else to shipping
+    console.log("check outt");
+    history.push("/login?redirect=shipping"); //if he not login in refiret to login page else to shipping
   };
   return (
     <Row>
@@ -96,7 +96,7 @@ const CartScreen = ({ match, location, history }) => {
               <h2>
                 {/* //The reduce() method reduces the array to a single value{' '} */}
                 Subtotal ({cartItems.reduce((acc, itemm) => acc + itemm.qty, 0)}
-                ) items{' '}
+                ) items{" "}
               </h2>
               $
               {cartItems.reduce(
