@@ -12,6 +12,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import NewPassword from "./screens/NewPassword";
 import ShippingScreen from "./screens/ShippingScreen";
+import PaymentScreen from "./screens/PaymentScreen";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <main className="mx-3">
         <Container>
           <Route path="/shipping" component={ShippingScreen} />
+          <Route path="/payment" component={PaymentScreen} />
 
           <Route path="/new_password/:token" component={NewPassword} />
           <Route path="/forgetpassword" component={ResetPasswordScreen} />
