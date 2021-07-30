@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const orderSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true, //id user how by product
-      ref: 'User',
+      ref: "User",
     },
     orderItems: [
       {
@@ -16,7 +16,7 @@ const orderSchema = mongoose.Schema(
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
-          ref: 'Product', //objet id nt3 product
+          ref: "Product", //objet id nt3 product
         },
       },
     ],
@@ -27,7 +27,8 @@ const orderSchema = mongoose.Schema(
       country: { type: String, required: true },
     },
     paymentMethod: {
-      type: String,
+      type: Object,
+      // nullable: true,
       required: true,
     },
     paymentResult: {
@@ -73,4 +74,4 @@ const orderSchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Order', orderSchema);
+module.exports = mongoose.model("Order", orderSchema);
