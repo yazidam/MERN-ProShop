@@ -61,7 +61,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    alert("errrorrr");
+    alert(" from get deatails orderrr");
     dispatch({
       type: ORDER_DETAILS_FAIL,
       payload:
