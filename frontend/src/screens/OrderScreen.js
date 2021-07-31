@@ -83,7 +83,7 @@ const OrderScreen = ({ match }) => {
               </p>
               <strong>Address:</strong>
 
-              <Table striped bordered hover>
+              <Table striped hover responsive className="table-sm">
                 <thead>
                   <tr>
                     <th>#</th>
