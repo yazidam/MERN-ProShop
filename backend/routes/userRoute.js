@@ -8,17 +8,20 @@ const {
   updateUserProfile,
   reset_password,
   new_password,
+  getUsers,
 } = require("../controllers/userController");
 const protect = require("../middleware/authMiddleware");
-
+const admin = require("../middleware/adminMidleware");
 router.post("/login", authUser);
 // router.get('/profile', protect, getUserProfile);
 // router.put('/update', updateUserProfile);
+
 router
   .route("/profile")
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
-router.post("/", registerUser);
+// router.get("/ahmed", getUsers); get all user method o5raa
+router.route("/").post(registerUser).get(protect, admin, getUsers);
 router.post("/reset", reset_password);
 router.post("/new_pass", new_password);
 

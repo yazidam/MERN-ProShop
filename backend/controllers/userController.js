@@ -112,6 +112,13 @@ const updateUserProfile = async (req, res) => {
   }
 };
 
+//get all users admin anly can get all user
+const getUsers = async (req, res) => {
+  const users = await User.find(); //raq.user._id aya user bech yod5el
+
+  res.json(users);
+};
+
 // router.post('/reset-password'
 const reset_password = async (req, res) => {
   crypto.randomBytes(32, (err, buffer) => {
@@ -132,10 +139,10 @@ const reset_password = async (req, res) => {
           secure: false,
           requireTLS: true,
           // port: 25,
-    // host: 'localhost',
-    tls: {
-      rejectUnauthorized: false
-    },
+          // host: 'localhost',
+          tls: {
+            rejectUnauthorized: false,
+          },
           // host: 'smtp.gmail.com',
           // port: 587,
           // secure: true, // use SSL
@@ -176,8 +183,8 @@ const new_password = async (req, res) => {
     }
     bcrypt.hash(newPassword, 10).then((hashedpassword) => {
       user.password = hashedpassword;
-      user.resetToken = '';
-      user.expireToken = '';
+      user.resetToken = "";
+      user.expireToken = "";
       user.save().then((saveduser) => {
         return res.send("password updated success");
       });
@@ -192,4 +199,5 @@ module.exports = {
   updateUserProfile,
   reset_password,
   new_password,
+  getUsers,
 };
