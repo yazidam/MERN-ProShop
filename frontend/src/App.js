@@ -17,6 +17,7 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
+import ProductListScreen from "./screens/ProductListScreen";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       <main className="mx-3">
         <Container>
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
+          <Route path="/admin/productslist" component={ProductListScreen} />
 
           <Route path="/admin/userlist" component={UserListScreen} />
 
