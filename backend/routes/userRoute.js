@@ -10,6 +10,8 @@ const {
   new_password,
   getUsers,
   deleteUser,
+  getUserById,
+  updateUser,
 } = require("../controllers/userController");
 const protect = require("../middleware/authMiddleware");
 const admin = require("../middleware/adminMidleware");
@@ -23,7 +25,11 @@ router
   .put(protect, updateUserProfile);
 // router.get("/ahmed", getUsers); get all user method o5raa
 router.route("/").post(registerUser).get(protect, admin, getUsers);
-router.delete("/:id", protect, admin, deleteUser);
+router
+  .route("/:id")
+  .delete(protect, admin, deleteUser)
+  .get(protect, admin, getUserById)
+  .put(protect, admin, updateUser);
 
 router.post("/reset", reset_password);
 router.post("/new_pass", new_password);

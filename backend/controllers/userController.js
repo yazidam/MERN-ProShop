@@ -131,6 +131,39 @@ const getUsers = async (req, res) => {
   res.json(users);
 };
 
+//get user by id admin anly can get user
+const getUserById = async (req, res) => {
+  const user = await User.findById(req.params.id).select("-password"); //raq.user._id aya user bech yod5el
+  if (user) {
+    res.json(user);
+  } else {
+    res.status(404);
+    throw new Error("user dont found");
+  }
+};
+
+//update user from admin dashbord
+const updateUser = async (req, res) => {
+  const user = await User.findById(req.params.id); //raq.user._id aya user bech yod5el
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.isAdmin = req.body.isAdmin || user.isAdmin;
+    // const hashedPsw = await bcrypt.hash(password, 10);
+
+    const updatedUser = await user.save();
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("user dont found");
+  }
+};
+
 // router.post('/reset-password'
 const reset_password = async (req, res) => {
   crypto.randomBytes(32, (err, buffer) => {
@@ -213,4 +246,6 @@ module.exports = {
   new_password,
   getUsers,
   deleteUser,
+  getUserById,
+  updateUser,
 };
