@@ -5,7 +5,10 @@ import {
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_REQUEST,
-} from '../constants/productConstants';
+  PRODUCT_DELETE_REQUEST,
+  PRODUCT_DELETE_FAIL,
+  PRODUCT_DELETE_SUCCESS,
+} from "../constants/productConstants";
 
 export const productListReducer = (state = { products: [] }, action) => {
   switch (action.type) {
@@ -31,6 +34,20 @@ export const productDetailsReducer = (
       return { loading: false, product: action.payload }; //send data in payload
     case PRODUCT_DETAILS_FAIL:
       return { loading: false, error: action.payload }; //send err in npayload
+    default:
+      return state;
+  }
+};
+
+export const productDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_DELETE_REQUEST:
+      return { loading: true };
+    case PRODUCT_DELETE_SUCCESS:
+      return { loading: false, success: true }; //send data in payload
+    case PRODUCT_DELETE_FAIL:
+      return { loading: false, error: action.payload }; //send err in npayload
+
     default:
       return state;
   }
