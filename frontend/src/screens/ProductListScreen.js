@@ -20,6 +20,7 @@ const ProductListScreen = ({ history, match }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  console.log("userloginn", userLogin);
   const productDelete = useSelector((state) => state.productDelete);
   const {
     success: successDelete,
