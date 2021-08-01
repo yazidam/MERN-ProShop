@@ -113,6 +113,18 @@ const updateUserProfile = async (req, res) => {
 };
 
 //get all users admin anly can get all user
+const deleteUser = async (req, res) => {
+  const user = await User.findById(req.params.id); //raq.user._id aya user bech yod5el
+  if (user) {
+    await user.remove();
+    res.json({ message: "user removed" });
+  } else {
+    res.status(404);
+    throw new Error("user dont found");
+  }
+};
+
+//delete user admin anly can delete user
 const getUsers = async (req, res) => {
   const users = await User.find(); //raq.user._id aya user bech yod5el
 
@@ -200,4 +212,5 @@ module.exports = {
   reset_password,
   new_password,
   getUsers,
+  deleteUser,
 };
