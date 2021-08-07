@@ -1,16 +1,48 @@
 import React, { useState } from "react";
 import axios from "axios";
+// import { useToasts } from "react-toast-notifications";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ResetPasswordScreen = (props) => {
   const [user, setUser] = useState({ email: "" });
-
+  // const { addToast } = useToasts();
   const handleResetPassword = async () => {
     axios.post("/api/users/reset", user).then((res) => {
       if (res.status === 203) {
         alert(res.data);
+        // addToast("Cet e-mail ne correspond pas à un utilisateur enregistré.", {
+        //   appearance: "error",
+        // });
+        toast.error(
+          "Cet e-mail ne correspond pas à un utilisateur enregistré",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
       }
       if (res.status === 200) {
         alert(res.data);
-        props.history.push("/");
+        toast.success(
+          "Vérifiez votre boîte de réception, nous avons envoyé un lien de récupération à votre adresse e-mail",
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          }
+        );
+        setTimeout(() => {
+          props.history.push("/");
+        }, 5000);
       }
     });
     setUser({ email: "" });
@@ -79,6 +111,7 @@ const ResetPasswordScreen = (props) => {
           </div>
         </div>
       </section>
+      <ToastContainer />
     </>
   );
 };
