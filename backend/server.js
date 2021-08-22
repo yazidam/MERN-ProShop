@@ -6,10 +6,34 @@ const productRoute = require("./routes/productRoute");
 const userRoute = require("./routes/userRoute");
 const orderRoute = require("./routes/orderRoute");
 const connectDB = require("./config/db");
+var cookieParser = require("cookie-parser");
+const session = require("express-session");
+const MongoDBSession = require("connect-mongodb-session")(session);
+const mongoose = require("mongoose");
 
 dotenv.config();
 connectDB();
 app.use(express.json());
+app.use(cookieParser());
+
+mongoose.set("useFindAndModify", false);
+const store = new MongoDBSession({
+  uri: process.env.MONGO_URI,
+  collection: "mySession",
+});
+
+app.use(
+  session({
+    secret: "key to sign in",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 60000,
+      httpOnly: false,
+    },
+    store: store,
+  })
+);
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.use("/api/orders", orderRoute);
