@@ -22,6 +22,7 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
 } from "../constants/userConstants";
+import { CART_RESET_SHIPPING_ADDRESS } from "../constants/cartConstants";
 import { ORDER_LIST_MY_RESET } from "../constants/orderConstants";
 import axios from "axios";
 
@@ -67,6 +68,7 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: ORDER_LIST_MY_RESET,
   });
+  dispatch({ type: CART_RESET_SHIPPING_ADDRESS });
 };
 
 export const register = (name, email, password) => async (dispatch) => {
