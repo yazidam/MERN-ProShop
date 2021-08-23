@@ -19,6 +19,7 @@ import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
+import OrderListScreen from "./screens/OrderListScreen";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <main className="mx-3">
         <Container>
           <Route path="/admin/user/:id/edit" component={UserEditScreen} />
+          <Route path="/admin/orderlist" component={OrderListScreen} />
           <Route path="/admin/productslist" component={ProductListScreen} />
           <Route path="/admin/product/:id/edit" component={ProductEditScreen} />
 
