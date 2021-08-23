@@ -14,6 +14,9 @@ import {
   ORDER_LIST_FAIL,
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
+  ORDER_DELIVER_FAIL,
+  ORDER_DELIVER_REQUEST,
+  ORDER_DELIVER_SUCCESS,
 } from "../constants/orderConstants";
 import axios from "axios";
 
@@ -177,6 +180,43 @@ export const listOrders = () => async (dispatch, getState) => {
     alert(" from get LIST  orderrr admin");
     dispatch({
       type: ORDER_LIST_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const deliverOrder = (order) => async (dispatch, getState) => {
+  // get statte to get token
+  try {
+    dispatch({ type: ORDER_DELIVER_REQUEST });
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        //when we send data we whon send in the headres a contenet type
+        // "Content-Type": "application/json",
+        // get request na7ineha
+        //get userinfo to pass token in to headre
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.put(
+      `/api/orders/${order._id}/deliver`,
+      {},
+      config
+    );
+    dispatch({
+      type: ORDER_DELIVER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    // alert(" from get deatails orderrr");
+    dispatch({
+      type: ORDER_DELIVER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.error.response.data.message
