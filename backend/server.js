@@ -5,11 +5,13 @@ const dotenv = require("dotenv");
 const productRoute = require("./routes/productRoute");
 const userRoute = require("./routes/userRoute");
 const orderRoute = require("./routes/orderRoute");
+const uploadsRoute = require("./routes/uploadRoute");
 const connectDB = require("./config/db");
 var cookieParser = require("cookie-parser");
 const session = require("express-session");
 const MongoDBSession = require("connect-mongodb-session")(session);
 const mongoose = require("mongoose");
+const path = require("path");
 
 dotenv.config();
 connectDB();
@@ -37,6 +39,10 @@ app.use(
 app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.use("/api/orders", orderRoute);
+app.use("/api/upload", uploadsRoute);
+//make upload a static folder to upload on browzer
+const dirmae = path.resolve();
+app.use("/uploads", express.static(path.join(dirmae, "/uploads")));
 app.get("/api/config/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID);
 });
