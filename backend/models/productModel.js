@@ -1,9 +1,14 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const reviewSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     rating: { type: Number, required: true },
     comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true, //add relation ship between product and user ENA user zeda product etheka
+      ref: "User",
+    },
   },
   {
     timestamps: true,
@@ -14,7 +19,7 @@ const productShema = mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true, //add relation ship between product and user ENA user zeda product etheka
-      ref: 'User',
+      ref: "User",
     },
     name: {
       type: String,
@@ -63,4 +68,4 @@ const productShema = mongoose.Schema(
   }
 );
 //  const User = mongoose.model('User', userShema)
-module.exports = mongoose.model('Product', productShema);
+module.exports = mongoose.model("Product", productShema);
