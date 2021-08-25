@@ -2,23 +2,18 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/producutActions";
 import { Row, Col } from "react-bootstrap";
-// import products from '../products';
-// import axios from 'axios';
+
 import Product from "../components/Product";
 import Loader from "../components/Loader";
-const HomeScreen = () => {
+const HomeScreen = ({ match }) => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
-  // const [products, setProducts] = useState([]);
+
+  const keyword = match.params.keyword;
   useEffect(() => {
-    dispatch(listProducts());
-    // const fetechProduct = async () => {
-    //   const { data } = await axios.get('/api/products');
-    //   setProducts(data);
-    // };
-    // fetechProduct();
-  }, [dispatch]);
+    dispatch(listProducts(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <>
