@@ -110,6 +110,11 @@ const createProductReview = async (req, res) => {
     throw new Error("product dont found");
   }
 };
+
+const getTopProduct = async (req, res) => {
+  const products = await Product.find({}).sort({ rating: -1 }).limit(3);
+  res.json(products);
+};
 module.exports = {
   getProductById,
   getProducts,
@@ -117,4 +122,5 @@ module.exports = {
   updateProduct,
   createProduct,
   createProductReview,
+  getTopProduct,
 };
