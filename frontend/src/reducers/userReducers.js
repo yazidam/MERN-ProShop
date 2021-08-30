@@ -23,6 +23,9 @@ import {
   USER_UPDATE_FAIL,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_REQUEST,
+  USER_STAT_REQUEST,
+  USER_STAT_SUCCESS,
+  USER_STAT_FAIL,
 } from "../constants/userConstants";
 
 export const userLoginReducer = (state = {}, action) => {
@@ -121,6 +124,20 @@ export const userUpdateReducer = (state = { user: {} }, action) => {
       return { loading: false, error: action.payload }; //send err in npayload
     case USER_UPDATE_RESET:
       return { user: {} };
+    default:
+      return state;
+  }
+};
+
+export const userStatReducer = (state = { stat: [] }, action) => {
+  switch (action.type) {
+    case USER_STAT_REQUEST:
+      return { loading: true };
+    case USER_STAT_SUCCESS:
+      return { loading: false, stat: action.payload }; //send data in payload
+    case USER_STAT_FAIL:
+      return { loading: false, error: action.payload }; //send err in npayload
+
     default:
       return state;
   }

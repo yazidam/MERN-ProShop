@@ -51,7 +51,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Route render={({ history }) => <SeachBox history={history} />} />
-            <Nav className="collapse navbar-collapse justify-content-end">
+            <Nav className=" navbar-collapse justify-content-end">
               <LinkContainer to="/cart">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i> Cart
@@ -85,6 +85,10 @@ const Header = () => {
 
                   <LinkContainer to="/admin/orderlist">
                     <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+
+                  <LinkContainer to="/admin/stat">
+                    <NavDropdown.Item>Stats</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}

@@ -115,6 +115,24 @@ const getTopProduct = async (req, res) => {
   const products = await Product.find({}).sort({ rating: -1 }).limit(3);
   res.json(products);
 };
+const getTopPriceProduct = async (req, res) => {
+  const top = await Product.aggregate([
+    {
+      $group: {
+        _id: "$numReviews",
+        avregePriceGroupeBynumReviews: {
+          $avg: "$price",
+        },
+      },
+    },
+    {
+      $sort: {
+        avregePriceGroupeBynumReviews: -1,
+      },
+    },
+  ]);
+  res.json(top);
+};
 module.exports = {
   getProductById,
   getProducts,
@@ -123,4 +141,5 @@ module.exports = {
   createProduct,
   createProductReview,
   getTopProduct,
+  getTopPriceProduct,
 };
