@@ -4,7 +4,7 @@ import ReactApexChart from "react-apexcharts";
 import { useDispatch, useSelector } from "react-redux";
 import { statUser } from "../actions/userActions";
 import Loader from "../components/Loader";
-
+import "../styles/stat.css";
 const StatScreen = () => {
   const dispatch = useDispatch();
 
@@ -41,6 +41,9 @@ const StatScreen = () => {
     },
 
     xaxis: {
+      title: {
+        text: "Reviews Number",
+      },
       categories: r,
     },
   };
@@ -63,22 +66,24 @@ const StatScreen = () => {
   return (
     <>
       <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          margin: "150px",
-          backgroundColor: "#f8f9fb",
-          borderRadius: "20px",
-        }}
+        className="bb "
+        // style={{
+        //   display: "flex",
+        //   justifyContent: "center",
+        //   margin: "150px",
+        //   backgroundColor: "#f8f9fb",
+        //   borderRadius: "20px",
+        // }}
       >
         {loading ? (
           <Loader />
         ) : (
           <ReactApexChart
+            // className="bb"
             options={options}
             series={series}
             type="bar"
-            width={800}
+            width={450}
             height={500}
           />
         )}

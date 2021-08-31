@@ -1,0 +1,13 @@
+.bb {
+  background-color: #f8f9fb;
+  border-radius: 20px;
+  margin: 150px;
+  display: flex;
+  justify-content: center;
+}
+@media only screen and (width: 500px) {
+  .bb {
+    background-color: white;
+    margin: 10%;
+  }
+}
