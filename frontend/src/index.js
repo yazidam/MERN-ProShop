@@ -4,6 +4,8 @@ import "./bootstrap.min.css";
 import { Provider } from "react-redux"; //to emplaiment in our app we need to imoprt provider
 import store from "./store";
 import "./index.css";
+import "antd/dist/antd.css";
+
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 

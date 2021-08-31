@@ -1,7 +1,7 @@
 .bb {
-  background-color: #f8f9fb;
+  /* background-color: #f8f9fb; */
   border-radius: 20px;
-  margin: 150px;
+  /* margin: 150px; */
   display: flex;
   justify-content: center;
 }
