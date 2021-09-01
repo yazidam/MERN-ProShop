@@ -3,10 +3,8 @@ import "antd/dist/antd.css";
 import { Card, Avatar } from "antd";
 import { StatisticCardContainer } from "../styles/styled";
 import { theme } from "../colorConstants/colors";
-import StorefrontIcon from "@material-ui/icons/Storefront";
-import { TeamOutlined, TransactionOutlined } from "@ant-design/icons";
 
-function AdminStatisticCard({ data, title }) {
+function AdminStatisticCard({ data, title, icon }) {
   const { secondary } = theme;
   return (
     <StatisticCardContainer>
@@ -21,7 +19,7 @@ function AdminStatisticCard({ data, title }) {
               color: "#090702",
             }}
             size={61}
-            icon={<TeamOutlined />}
+            icon={icon}
           />
         </p>
         <div className="data">

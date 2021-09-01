@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { TeamOutlined, TransactionOutlined } from "@ant-design/icons";
 import { listUsers } from "../actions/userActions";
+import { listProducts } from "../actions/producutActions";
+import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+
 // import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { statUser } from "../actions/userActions";
@@ -24,8 +28,14 @@ const StatScreen = () => {
   const userList = useSelector((state) => state.userList);
   const { users, loading: useloading } = userList;
 
+  const productList = useSelector((state) => state.productList);
+  const { products } = productList;
+
   const userss = users ? Object.values(users) : []; //The Object.values() method returns an array of a given object's own enumerable property values
   const numberOgUsers = userss.length;
+
+  const pro = products ? Object.values(products) : []; //The Object.values() method returns an array of a given object's own enumerable property values
+  const numberOfProducts = pro.length * 2;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -77,6 +87,7 @@ const StatScreen = () => {
       dispatch(listUsers());
 
       dispatch(statUser());
+      dispatch(listProducts());
     }
   }, [userInfo, dispatch]);
   return (
@@ -106,14 +117,14 @@ const StatScreen = () => {
               data={numberOgUsers}
             />
             <AdminStatisticCard
-              title={"Total des Utilisateurs"}
-              icon={<TeamOutlined />}
+              title={"Total des Orders"}
+              icon={<ListAltIcon />}
               data={numberOgUsers}
             />{" "}
             <AdminStatisticCard
-              title={"Total des Utilisateurs"}
-              icon={<TeamOutlined />}
-              data={numberOgUsers}
+              title={"Total des Produits"}
+              icon={<ShoppingCartOutlinedIcon />}
+              data={numberOfProducts}
             />
           </AdminDashboardContainer>
         )}
