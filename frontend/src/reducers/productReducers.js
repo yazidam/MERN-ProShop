@@ -35,6 +35,7 @@ export const productListReducer = (state = { products: [] }, action) => {
         products: action.payload.products,
         pages: action.payload.pages,
         page: action.payload.page,
+        productNumber: action.payload.productNumber,
       }; //send data in payload
     case PRODUCT_LIST_FAIL:
       return { loading: false, error: action.payload }; //send err in npayload

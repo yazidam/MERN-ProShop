@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import { TeamOutlined, TransactionOutlined } from "@ant-design/icons";
+import { TeamOutlined } from "@ant-design/icons";
 import { listUsers } from "../actions/userActions";
 import { listProducts } from "../actions/producutActions";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
@@ -11,31 +11,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { statUser } from "../actions/userActions";
 import Loader from "../components/Loader";
 import "../styles/stat.css";
-import StatisticCircle from "../components/StatisticCircle";
+
 import { AdminDashboardContainer } from "../components/AdminDashboardContainer";
-import StorefrontIcon from "@material-ui/icons/Storefront";
 
 import AdminStatisticCard from "../components/StatisticCircle";
 import { CustomCard } from "../components/cards/CustomCard";
 const StatScreen = () => {
   const dispatch = useDispatch();
-  const labels = ["actifs", "non actifs"];
-  const oredersLabels = ["en attente", "annulée", "passée"];
 
   const userStat = useSelector((state) => state.userStat);
-  const { stat, loading, error } = userStat;
+  const { stat, loading } = userStat;
 
   const userList = useSelector((state) => state.userList);
-  const { users, loading: useloading } = userList;
+  const { users } = userList;
 
   const productList = useSelector((state) => state.productList);
-  const { products } = productList;
+  const { productNumber } = productList;
 
   const userss = users ? Object.values(users) : []; //The Object.values() method returns an array of a given object's own enumerable property values
   const numberOgUsers = userss.length;
 
-  const pro = products ? Object.values(products) : []; //The Object.values() method returns an array of a given object's own enumerable property values
-  const numberOfProducts = pro.length * 2;
+  const numberOfProducts = productNumber?.map((x) => x.id);
+  console.log("numberOfProducts", numberOfProducts);
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
