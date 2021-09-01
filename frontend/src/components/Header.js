@@ -31,6 +31,7 @@ import { useHistory } from "react-router-dom";
 import SeachBox from "./SeachBox";
 // call action usedispatche
 // get somthing useselector
+import "../styles/nav.css";
 const Header = () => {
   const history = useHistory();
 
@@ -42,7 +43,7 @@ const Header = () => {
     history.push("/login");
   };
   return (
-    <header>
+    <header className="navbarr">
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
