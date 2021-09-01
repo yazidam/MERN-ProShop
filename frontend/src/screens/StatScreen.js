@@ -12,6 +12,7 @@ import { AdminDashboardContainer } from "../components/AdminDashboardContainer";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 
 import AdminStatisticCard from "../components/StatisticCircle";
+import { CustomCard } from "../components/cards/CustomCard";
 const StatScreen = () => {
   const dispatch = useDispatch();
   const labels = ["actifs", "non actifs"];
@@ -119,14 +120,18 @@ const StatScreen = () => {
       </div>
       {console.log("yyy", stat)}
       <div className="bb ">
-        <ReactApexChart
-          // className="bb"
-          options={options}
-          series={series}
-          type="bar"
-          width={450}
-          height={500}
-        />
+        <CustomCard>
+          <div>
+            <ReactApexChart
+              // className="bb"
+              options={options}
+              series={series}
+              type="line"
+              // width={1000}
+              height={350}
+            />
+          </div>
+        </CustomCard>
       </div>
     </>
   );
