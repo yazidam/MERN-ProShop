@@ -101,29 +101,46 @@ const StatScreen = () => {
         {loading ? (
           <Loader />
         ) : (
-          <AdminDashboardContainer>
-            {/* <StatisticCircle
+          <>
+            <marquee scrollamount="6">
+              <div
+                style={{
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: "50px",
+                  fontFamily: "inherit",
+                  fontStyle: "normal",
+                  // backgroundColor: "#f8f9fb",
+                }}
+              >
+                bienvenue à votre espace
+              </div>
+            </marquee>
+
+            <AdminDashboardContainer>
+              {/* <StatisticCircle
           data={2}
           labels={labels}
           text="Total des Utilisateurs"
           icon={<TeamOutlined />}
         /> */}
-            <AdminStatisticCard
-              title={"Total des Utilisateurs"}
-              icon={<TeamOutlined />}
-              data={numberOgUsers}
-            />
-            <AdminStatisticCard
-              title={"Total des Orders"}
-              icon={<ListAltIcon />}
-              data={numberOgUsers}
-            />{" "}
-            <AdminStatisticCard
-              title={"Total des Produits"}
-              icon={<ShoppingCartOutlinedIcon />}
-              data={numberOfProducts}
-            />
-          </AdminDashboardContainer>
+              <AdminStatisticCard
+                title={"Total des Utilisateurs"}
+                icon={<TeamOutlined />}
+                data={numberOgUsers}
+              />
+              <AdminStatisticCard
+                title={"Total des Orders"}
+                icon={<ListAltIcon />}
+                data={numberOgUsers}
+              />{" "}
+              <AdminStatisticCard
+                title={"Total des Produits"}
+                icon={<ShoppingCartOutlinedIcon />}
+                data={numberOfProducts}
+              />
+            </AdminDashboardContainer>
+          </>
         )}
       </div>
       {console.log("yyy", stat)}

@@ -43,7 +43,7 @@ export const StatisticCardContainer = styled.div`
     font-size: 200px;
     text-align: center;
 
-    font-weight: bold;
+    font-weight: bold; //type nt3 ktiba
     color: #ff720d;
     background-color: #f8f9fb;
   }
