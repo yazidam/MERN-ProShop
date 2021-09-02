@@ -19,14 +19,23 @@ const HomeScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
 
   return (
-    <>
+    <div>
       {!keyword && <ProductCarousel />}
-      <h1>Lates products</h1>
+      <h1 style={{ display: "flex", justifyContent: "center" }}>
+        Lates products
+      </h1>
       {loading ? (
         <Loader />
       ) : (
         <>
-          <Row>
+          <Row
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignContent: "center",
+              justifyContent: "space-between",
+            }}
+          >
             {products.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
                 <Product product={product} />
@@ -40,7 +49,7 @@ const HomeScreen = ({ match }) => {
           />
         </>
       )}
-    </>
+    </div>
   );
 };
 

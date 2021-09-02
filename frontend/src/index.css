@@ -1,5 +1,9 @@
 main {
   min-height: 80vh;
+  /* background-color: blueviolet; */
+}
+body {
+  background-color: #f7f4f4 !important;
 }
 h3 {
   padding: 1rem 0;

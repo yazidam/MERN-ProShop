@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import Loader from '../components/Loader';
-import Message from '../components/Message';
-import FormContainer from '../components/FormContainer';
-import { login } from '../actions/userActions';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+import FormContainer from "../components/FormContainer";
+import { login } from "../actions/userActions";
 const LoginScreen = ({ location, history }) => {
-  const [email, setEmail] = useState(''); // default empty string ('')
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(""); // default empty string ('')
+  const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin); // njibo fih men userreducer
   const { loading, error, userInfo } = userLogin;
-  const redirect = location.search ? location.search.split('=')[1] : '/';
+  const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {
     if (userInfo) {
@@ -39,6 +39,7 @@ const LoginScreen = ({ location, history }) => {
     // history.push(redirect);
   };
   return (
+    // <body style={{ backgroundColor: "red" }}>
     <FormContainer>
       <h1> Sign In</h1>
       {error && <h2>verifier votre coordonner {error}</h2>}
@@ -76,9 +77,9 @@ const LoginScreen = ({ location, history }) => {
 
         <Row className="py-3">
           <Col>
-            New Coustomer?{' '}
+            New Coustomer?{" "}
             <Link
-              to={redirect ? `/register?redirect=${redirect}` : '/register'}
+              to={redirect ? `/register?redirect=${redirect}` : "/register"}
             >
               Register
             </Link>
@@ -89,6 +90,7 @@ const LoginScreen = ({ location, history }) => {
         </Row>
       </Form>
     </FormContainer>
+    // </body>
   );
 };
 
