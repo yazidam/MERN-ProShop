@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { listUsers, deleteUsers } from "../actions/userActions";
 import { Empty, message } from "antd";
+import { InfoUser, UsersContainer } from "../components/userStyle/InfoUser";
 
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -92,6 +93,9 @@ const UserListScreen = ({ history }) => {
               ))}
             </tbody>
           </Table>
+          <UsersContainer>
+            <InfoUser>ahmedyazidmejri</InfoUser>
+          </UsersContainer>
         </>
       )}
     </>
