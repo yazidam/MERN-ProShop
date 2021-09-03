@@ -6,6 +6,7 @@ const productRoute = require("./routes/productRoute");
 const userRoute = require("./routes/userRoute");
 const orderRoute = require("./routes/orderRoute");
 const uploadsRoute = require("./routes/uploadRoute");
+const pinRoute = require("./routes/pinRoute");
 const connectDB = require("./config/db");
 var cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -40,6 +41,7 @@ app.use("/api/products", productRoute);
 app.use("/api/users", userRoute);
 app.use("/api/orders", orderRoute);
 app.use("/api/upload", uploadsRoute);
+app.use("/api/pin", pinRoute);
 //make upload a static folder to upload on browzer
 const dirmae = path.resolve();
 app.use("/uploads", express.static(path.join(dirmae, "/uploads")));
