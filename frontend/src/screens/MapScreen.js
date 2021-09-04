@@ -1,10 +1,20 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import ReactMapGL, { Marker } from "react-map-gl";
-import { Room } from "@material-ui/icons";
+import ReactMapGL, { Marker, Popup } from "react-map-gl";
+import { Room, Star } from "@material-ui/icons";
 import mapboxgl, { setRTLTextPlugin } from "mapbox-gl";
-
+import { useDispatch, useSelector } from "react-redux";
+import "../styles/map.css";
+import { listPins } from "../actions/pinActions";
+import { format } from "timeago.js";
 const MapScreen = () => {
+  const userLogin = useSelector((state) => state.userLogin); // njibo fih men store
+  const { userInfo } = userLogin;
+  const dispatch = useDispatch();
+
+  const pinList = useSelector((state) => state.pinList);
+  const { pins, loading, error } = pinList;
+  const [currentPlaceId, setCurrentPlaceId] = useState(false);
   const [viewport, setViewport] = useState({
     width: "80vw",
     height: "75vh",
@@ -20,6 +30,16 @@ const MapScreen = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listPins());
+    }
+  }, [dispatch, userInfo]);
+
+  console.log("pinn", pins);
+  const handelMarkerClick = (id) => {
+    setCurrentPlaceId(id);
+  };
   return (
     <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
       {" "}
@@ -29,14 +49,60 @@ const MapScreen = () => {
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
-        <Marker
-          latitude={48.8582602}
-          longitude={2.2944991}
-          offsetLeft={-20}
-          offsetTop={-10}
-        >
-          <Room style={{ fontSize: viewport.zoom * 7, color: "slateblue" }} />
-        </Marker>
+        {pins?.map((p) => (
+          <>
+            <Marker
+              latitude={p.lat}
+              longitude={p.long}
+              offsetLeft={-20}
+              offsetTop={-10}
+            >
+              <Room
+                style={{ fontSize: viewport.zoom * 7, color: "slateblue" }}
+                onClick={() => handelMarkerClick(p._id)}
+              />
+            </Marker>
+            {p._id === currentPlaceId && (
+              <Popup
+                latitude={p.lat}
+                longitude={p.long}
+                closeButton={true}
+                closeOnClick={false}
+                onClose={() => setCurrentPlaceId(false)}
+                anchor="left"
+              >
+                <div
+                  style={{
+                    width: "250px",
+                    height: "250px",
+                  }}
+                >
+                  <label>Place</label>
+                  <h4 className="place">{p.title}</h4>
+                  <label>Review</label>
+                  <p className="desc">{p.desc}</p>
+                  <label>Rating</label>
+                  <div className="stars">
+                    <Star className="star" />
+                    <Star className="star" />
+                    <Star className="star" />
+                    <Star className="star" />
+                    <Star className="star" />
+                  </div>
+
+                  <label>Information</label>
+                  <br />
+                  <span className="username">
+                    Created by <b>{userInfo.name}</b>
+                  </span>
+                  <br />
+
+                  <span className="date">{format(p.createdAt)}</span>
+                </div>
+              </Popup>
+            )}
+          </>
+        ))}
       </ReactMapGL>
     </div>
   );

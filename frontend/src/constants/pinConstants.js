@@ -1,0 +1,3 @@
+export const PIN_LIST_REQUEST = "PIN_LIST_REQUEST";
+export const PIN_LIST_SUCCESS = "PIN_LIST_SUCCESS";
+export const PIN_LIST_FAIL = "PIN_LIST_FAIL";
