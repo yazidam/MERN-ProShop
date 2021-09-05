@@ -77,11 +77,11 @@ const MapScreen = () => {
                     height: "250px",
                   }}
                 >
-                  <label>Place</label>
+                  <label className="labell">Place</label>
                   <h4 className="place">{p.title}</h4>
-                  <label>Review</label>
+                  <label className="labell">Review</label>
                   <p className="desc">{p.desc}</p>
-                  <label>Rating</label>
+                  <label className="labell">Rating</label>
                   <div className="stars">
                     <Star className="star" />
                     <Star className="star" />
@@ -90,7 +90,7 @@ const MapScreen = () => {
                     <Star className="star" />
                   </div>
 
-                  <label>Information</label>
+                  <label className="labell">Information</label>
                   <br />
                   <span className="username">
                     Created by <b>{userInfo.name}</b>
