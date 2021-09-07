@@ -22,6 +22,7 @@ const MapScreen = () => {
     longitude: 10.098907749999999,
     zoom: 4,
   });
+  const [newPlace, setNewPlace] = useState("");
   useEffect(() => {
     if (mapboxgl.getRTLTextPluginStatus() !== "loaded") {
       mapboxgl.setRTLTextPlugin(
@@ -36,9 +37,13 @@ const MapScreen = () => {
     }
   }, [dispatch, userInfo]);
 
-  console.log("pinn", pins);
+  // console.log("pinn", pins);
   const handelMarkerClick = (id) => {
     setCurrentPlaceId(id);
+  };
+  const handelAddPoint = (e) => {
+    const [long, lat] = e.lngLat;
+    setNewPlace({ long, lat });
   };
   return (
     <div style={{ display: "flex", justifyContent: "center", margin: "20px" }}>
@@ -48,6 +53,7 @@ const MapScreen = () => {
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
+        onDblClick={handelAddPoint}
       >
         {pins?.map((p) => (
           <>
@@ -58,7 +64,11 @@ const MapScreen = () => {
               offsetTop={-10}
             >
               <Room
-                style={{ fontSize: viewport.zoom * 7, color: "slateblue" }}
+                style={{
+                  fontSize: viewport.zoom * 7,
+                  color: "slateblue",
+                  cursor: "pointer",
+                }}
                 onClick={() => handelMarkerClick(p._id)}
               />
             </Marker>
@@ -103,6 +113,18 @@ const MapScreen = () => {
             )}
           </>
         ))}
+        {newPlace && (
+          <Popup
+            latitude={newPlace.lat}
+            longitude={newPlace.long}
+            closeButton={true}
+            closeOnClick={false}
+            onClose={() => setNewPlace(false)}
+            anchor="left"
+          >
+            Hello
+          </Popup>
+        )}
       </ReactMapGL>
     </div>
   );
