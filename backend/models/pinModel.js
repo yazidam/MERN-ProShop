@@ -7,7 +7,7 @@ const pinSchema = mongoose.Schema(
       required: true, //id user how by product
       ref: "User",
     },
-    usename: {
+    username: {
       type: String,
       require: true,
     },

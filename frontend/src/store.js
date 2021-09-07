@@ -30,7 +30,7 @@ import {
   orderListReducer,
   orderDeliverReducer,
 } from "./reducers/orderReducers";
-import { pinListReducer } from "./reducers/pinReducers";
+import { pinListReducer, pinCreateReducer } from "./reducers/pinReducers";
 const reducer = combineReducers({
   //all reduceru we need to aded here
   // empty objet we don't have any reducer yet   //b3ed nzidhom
@@ -57,6 +57,7 @@ const reducer = combineReducers({
   orderListMy: orderListMyReducer,
   orderList: orderListReducer,
   pinList: pinListReducer,
+  pinCreate: pinCreateReducer,
 });
 
 const cartItemsFromStorage = localStorage.getItem("cartItems")

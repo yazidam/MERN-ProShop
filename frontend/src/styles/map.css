@@ -22,7 +22,7 @@
   font-size: 12px;
 }
 
-/* form {
+.formm {
   width: 250px;
   height: 250px;
   display: flex;
@@ -31,9 +31,9 @@
   color: rgb(88, 87, 87);
 }
 
-input {
+.inputt {
   border: none;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid rgb(160, 129, 129);
 }
 
 input::placeholder,
@@ -51,4 +51,12 @@ select:focus {
 textarea {
   border: none;
   border-bottom: 1px solid gray;
-} */
+}
+.submitButton {
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  background-color: tomato;
+  cursor: pointer;
+}
