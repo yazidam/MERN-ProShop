@@ -38,8 +38,9 @@ const MapScreen = () => {
   }, [dispatch, userInfo]);
 
   // console.log("pinn", pins);
-  const handelMarkerClick = (id) => {
+  const handelMarkerClick = (id, lat, long) => {
     setCurrentPlaceId(id);
+    setViewport({ ...viewport, latitude: lat, longitude: long });
   };
   const handelAddPoint = (e) => {
     const [long, lat] = e.lngLat;
@@ -54,6 +55,7 @@ const MapScreen = () => {
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
         mapStyle="mapbox://styles/mapbox/streets-v11"
         onDblClick={handelAddPoint}
+        transitionDuration="200"
       >
         {pins?.map((p) => (
           <>
@@ -69,7 +71,7 @@ const MapScreen = () => {
                   color: "slateblue",
                   cursor: "pointer",
                 }}
-                onClick={() => handelMarkerClick(p._id)}
+                onClick={() => handelMarkerClick(p._id, p.lat, p.long)}
               />
             </Marker>
             {p._id === currentPlaceId && (
