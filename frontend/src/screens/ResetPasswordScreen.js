@@ -3,7 +3,10 @@ import axios from "axios";
 // import { useToasts } from "react-toast-notifications";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 const ResetPasswordScreen = (props) => {
+  const { t, i18n } = useTranslation();
+
   const [user, setUser] = useState({ email: "" });
   // const { addToast } = useToasts();
   const handleResetPassword = async () => {
@@ -53,7 +56,7 @@ const ResetPasswordScreen = (props) => {
   };
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>here we reset password for free</h1>
+      <h1 style={{ textAlign: "center" }}>{t("reset-password-test")}</h1>
       <section
         className="Form my-4 mx-5"
         style={{ padding: 0, margin: 0, boxSizing: "border-box" }}
@@ -72,7 +75,7 @@ const ResetPasswordScreen = (props) => {
           >
             <div className="px-5 py-5">
               <h2 className="font-weight-bold py-3">
-                Please enter your e-mail address
+                {t("enter-email-to-reset-password")}
               </h2>
               <form>
                 <div
@@ -102,7 +105,7 @@ const ResetPasswordScreen = (props) => {
                       onClick={handleResetPassword}
                     >
                       {" "}
-                      Reset Password
+                      {t("password-recovery")}
                     </button>
                   </div>
                 </div>

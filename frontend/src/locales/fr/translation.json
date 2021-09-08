@@ -7,5 +7,8 @@
   "password-placeholder": "Entrez votre mot de passe",
   "signIn-button": "Connexion",
   "forgot-password-label": "Mot de passe oublié ?",
-  "nouveau-client-text": "Nouveau client?"
+  "nouveau-client-text": "Nouveau client?",
+  "reset-password-test": "Réinitialisons le mot de passe gratuitemente",
+  "enter-email-to-reset-password": "Veuillez saisir votre adresse e-mail",
+  "password-recovery": "Récupération du mot de passe"
 }

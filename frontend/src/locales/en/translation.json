@@ -7,5 +7,8 @@
   "password-placeholder": "Enter your password",
   "signIn-button": "Sign in",
   "forgot-password-label": "Forgot password ?",
-  "nouveau-client-text": "New Customer?"
+  "nouveau-client-text": "New Customer?",
+  "reset-password-test": "here we reset password for free",
+  "enter-email-to-reset-password": "Please enter your e-mail address",
+  "password-recovery": "Password recovery"
 }
