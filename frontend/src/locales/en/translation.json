@@ -1,3 +1,11 @@
 {
-  "signIn-label": "Sign in"
+  "signIn-label": "Sign in",
+  "register-button": "Register",
+  "signIn-email-label": "Email address",
+  "email-placeholder": "Enter your email address",
+  "password-label": "Password",
+  "password-placeholder": "Enter your password",
+  "signIn-button": "Sign in",
+  "forgot-password-label": "Forgot password ?",
+  "nouveau-client-text": "New Customer?"
 }

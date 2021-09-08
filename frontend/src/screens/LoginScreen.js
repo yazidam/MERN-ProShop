@@ -51,20 +51,20 @@ const LoginScreen = ({ location, history }) => {
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label>{t("signIn-email-label")}</Form.Label>
           <Form.Control
             type="email"
-            placeholder="Enter Email"
+            placeholder={t("email-placeholder")}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="password">
-          <Form.Label>Password </Form.Label>
+          <Form.Label>{t("password-label")} </Form.Label>
           <Form.Control
             type="password"
-            placeholder="Enter password"
+            placeholder={t("password-placeholder")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
@@ -74,21 +74,25 @@ const LoginScreen = ({ location, history }) => {
           type="submit"
           variant="primary"
           className="my-3 "
+          style={{
+            borderRadius: "15px",
+          }}
           disabled={email.length < 10}
         >
-          Sign In
+          {t("signIn-button")}
         </Button>
 
         <Row className="py-3">
           <Col>
-            New Coustomer?{" "}
+            {t("nouveau-client-text")}
             <Link
+              className="mx-3"
               to={redirect ? `/register?redirect=${redirect}` : "/register"}
             >
-              Register
+              {t("register-button")}
             </Link>
             <Link className="mx-3" to="/forgetpassword">
-              Reset Password
+              {t("forgot-password-label")}
             </Link>
           </Col>
         </Row>
