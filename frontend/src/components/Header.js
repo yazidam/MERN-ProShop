@@ -29,18 +29,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../actions/userActions";
 import { useHistory } from "react-router-dom";
 import SeachBox from "./SeachBox";
+import { useTranslation } from "react-i18next";
 // call action usedispatche
 // get somthing useselector
 import "../styles/nav.css";
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const history = useHistory();
-
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   const logoutHandler = () => {
     dispatch(logout());
     history.push("/login");
+  };
+  const changeLanguageHandler = (e) => {
+    const languageValue = e.target.value;
+    i18n.changeLanguage(languageValue);
+    // i18n.changeLanguage(languageValue);
   };
   return (
     <header className="navbarr">
@@ -68,11 +74,32 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <LinkContainer to="/login">
-                  <Nav.Link>
-                    <i className="fas fa-user"></i> Sign In
-                  </Nav.Link>
-                </LinkContainer>
+                <>
+                  <LinkContainer to="/login">
+                    <Nav.Link>
+                      <i className="fas fa-user"></i> Sign In
+                    </Nav.Link>
+                  </LinkContainer>
+                  <select
+                    className="form-select form-select-sm width-90"
+                    style={{
+                      width: "104px",
+                      borderRadius: "10px",
+                      color: "orange",
+                    }}
+                    title="Lang"
+                    // style={{ width: "-15px" }}
+                    onChange={changeLanguageHandler}
+                  >
+                    {/* <LinkContainer> */}
+                    <option>en</option>
+
+                    <option>fr</option>
+                    {/* </LinkContainer> */}
+                    {/* <LinkContainer> */}
+                    {/* </LinkContainer> */}
+                  </select>
+                </>
               )}
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title="Admin" id="adminmenu">

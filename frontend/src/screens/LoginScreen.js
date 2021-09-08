@@ -6,7 +6,11 @@ import Loader from "../components/Loader";
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 import { login } from "../actions/userActions";
+import { useTranslation } from "react-i18next";
+
 const LoginScreen = ({ location, history }) => {
+  const { t, i18n } = useTranslation();
+
   const [email, setEmail] = useState(""); // default empty string ('')
   const [password, setPassword] = useState("");
 
@@ -41,7 +45,7 @@ const LoginScreen = ({ location, history }) => {
   return (
     // <body style={{ backgroundColor: "red" }}>
     <FormContainer>
-      <h1> Sign In</h1>
+      <h1> {t("signIn-label")}</h1>
       {error && <h2>verifier votre coordonner {error}</h2>}
       {/* {error && <Message variant="danger">{error}</Message>} */}
       {loading && <Loader />}

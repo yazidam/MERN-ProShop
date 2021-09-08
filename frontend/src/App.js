@@ -22,7 +22,7 @@ import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import StatScreen from "./screens/StatScreen";
 import MapScreen from "./screens/MapScreen";
-
+import "./i18n";
 function App() {
   return (
     <Router>
