@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import axios from "axios";
 
@@ -7,6 +8,7 @@ export default function NewPassword(props) {
     password: "",
     token: props.match.params.token,
   });
+  const { t } = useTranslation();
 
   const handleNewPassword = async () => {
     console.log(user);
@@ -32,7 +34,11 @@ export default function NewPassword(props) {
   return (
     <section
       className="Form my-4 mx-5"
-      style={{ padding: 0, margin: 0, boxSizing: "border-box" }}
+      style={{
+        padding: 0,
+        margin: 0,
+        boxSizing: "border-box",
+      }}
     >
       <div
         className="container"
@@ -47,9 +53,7 @@ export default function NewPassword(props) {
           }}
         >
           <div className="px-5 py-5">
-            <h2 className="font-weight-bold py-3">
-              Please enter your new password
-            </h2>
+            <h2 className="font-weight-bold py-3">{t("enter-new-pass")}</h2>
             <form>
               <div
                 className="form-row"
@@ -58,7 +62,7 @@ export default function NewPassword(props) {
                 <div className="col-lg-7">
                   <input
                     type="password"
-                    placeholder="new password"
+                    placeholder={t("new-pass-placeholer")}
                     className="form-control my-3 p-4"
                     name="password"
                     value={user.password}
@@ -70,14 +74,25 @@ export default function NewPassword(props) {
                 className="form-row"
                 style={{ display: "flex", justifyContent: "center" }}
               >
-                <div className="col-lg-7">
+                <div
+                  className="col-lg-7"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <button
                     type="button"
                     className="btn1"
+                    style={{
+                      backgroundColor: "wheat",
+                      height: "50px",
+                      borderRadius: "15px",
+                    }}
                     id="btnNewPassword"
                     onClick={handleNewPassword}
                   >
-                    Reset Password
+                    {t("button-rest-pass")}
                   </button>
                 </div>
               </div>

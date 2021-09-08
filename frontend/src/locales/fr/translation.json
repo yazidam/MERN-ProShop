@@ -10,5 +10,10 @@
   "nouveau-client-text": "Nouveau client?",
   "reset-password-test": "Réinitialisons le mot de passe gratuitemente",
   "enter-email-to-reset-password": "Veuillez saisir votre adresse e-mail",
-  "password-recovery": "Récupération du mot de passe"
+  "password-recovery": "Récupération du mot de passe",
+  "error-message-reset-password": "Cet e-mail ne correspond pas à un utilisateur enregistré",
+  "succes-message-reset-password": "Vérifiez votre boîte de réception, nous avons envoyé un lien de récupération à votre adresse e-mail",
+  "enter-new-pass": "Veuillez entrer votre nouveau mot de passe",
+  "new-pass-placeholer": "nouveau mot de passe",
+  "button-rest-pass": "Réinitialiser le mot de passe"
 }

@@ -16,33 +16,27 @@ const ResetPasswordScreen = (props) => {
         // addToast("Cet e-mail ne correspond pas à un utilisateur enregistré.", {
         //   appearance: "error",
         // });
-        toast.error(
-          "Cet e-mail ne correspond pas à un utilisateur enregistré",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
+        toast.error(t("error-message-reset-password"), {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
       if (res.status === 200) {
         alert(res.data);
-        toast.success(
-          "Vérifiez votre boîte de réception, nous avons envoyé un lien de récupération à votre adresse e-mail",
-          {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          }
-        );
+        toast.success(t("succes-message-reset-password"), {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
         setTimeout(() => {
           props.history.push("/");
         }, 5000);

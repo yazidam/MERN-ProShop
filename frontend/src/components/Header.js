@@ -83,6 +83,7 @@ const Header = () => {
                   <select
                     className="form-select form-select-sm width-90"
                     style={{
+                      cursor: "pointer",
                       width: "104px",
                       borderRadius: "10px",
                       color: "orange",

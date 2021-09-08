@@ -10,5 +10,10 @@
   "nouveau-client-text": "New Customer?",
   "reset-password-test": "here we reset password for free",
   "enter-email-to-reset-password": "Please enter your e-mail address",
-  "password-recovery": "Password recovery"
+  "password-recovery": "Password recovery",
+  "error-message-reset-password": "This email does not correspond to a registered user",
+  "succes-message-reset-password": "Check your email, we have sent a recovery link to your email address",
+  "enter-new-pass": " Please enter your new password",
+  "new-pass-placeholer": "new password",
+  "button-rest-pass": " Reset Password"
 }
